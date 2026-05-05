@@ -60,7 +60,7 @@ if current_user:
     print("====================Loan eligiblity check===================")
     salary = float(input("Enter the Salary:"))
     if salary >= 20000:
-
+     loan = current_user["loan"]
         if loan == "personal":
             loan_type = "Personal Loan"
             rate = 12
