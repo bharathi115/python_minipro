@@ -4,9 +4,9 @@ import pywhatkit as kit
 
 p.init()
 p.display.set_caption("Loan Enrollment system")
-ps1=p.display.set_mode((800,800))
-ps=p.image.load(r"loan.png")
-ps1.blit(ps,(10,60))
+ps1 = p.display.set_mode((800, 800))
+ps = p.image.load(r"loan.png")
+ps1.blit(ps, (10, 40))
 p.display.update()
 time.sleep(5)
 p.quit()
@@ -20,20 +20,17 @@ for i in range(n):
     print(f"\nEnter details for Person {i+1}")
 
     name = input("Enter your Name: ")
-    password = input("Enter your password: ")
     age = int(input("Enter your Age: "))
     loan = input("Enter loan type (personal/business/home): ").lower()
     gender = input("Enter your Gender: ")
+    password = input("Enter your password: ")
 
-    users.append({
-        "name": name,
-        "password": password,
-        "age": age,
-        "loan": loan,
-        "gender": gender
-    })
+    users.append(
+        {"name": name, "password": password, "age": age, "loan": loan, "gender": gender}
+    )
 
-print("--- Login ---")
+print("==================== Login ==================")
+
 
 def login(users):
     attempts = 3
@@ -52,6 +49,7 @@ def login(users):
 
     return None
 
+
 current_user = login(users)
 
 if current_user:
@@ -60,23 +58,26 @@ if current_user:
     print("====================Loan eligiblity check===================")
     salary = float(input("Enter the Salary:"))
     if salary >= 20000:
-     loan = current_user["loan"]
-        if loan == "personal":
-            loan_type = "Personal Loan"
+        loan_type = input("Enter loan type (personal/business/home): ").strip().lower()
+        loan_type = loan_type.replace(" loan", "")
+
+        if loan_type in ["personal", "personal loan"]:
             rate = 12
-        elif loan == "business":
-            loan_type = "Business Loan"
+        elif loan_type in ["business", "business loan"]:
             rate = 10
-        elif loan == "home":
-            loan_type = "Home Loan"
+        elif loan_type in ["home", "home loan"]:
             rate = 8
         else:
             print("Invalid loan type. Restart.")
             exit()
+
         print("You are eligible for this loan")
+        print("Loan Type:", loan_type)
+        print("Interest Rate:", rate, "%")
+
 
         print("================ Loan Details================")
-        amount = float(input("Enter the Amount :"))
+        amount = float(input("Enter the Loan Amount :"))
         annual_rate = rate  #  interst only
         time = int(input("Enter the payable loan completed time(months):"))  # 2 years count 24 months
         r = annual_rate / (12 * 100)
