@@ -37,19 +37,20 @@ print("--- Login ---")
 
 def login(users):
     attempts = 3
+
     while attempts > 0:
         user = input("User: ")
         pas = input("Enter your Password: ")
+
         for u in users:
-         if  u["name"] == user and u["password"] == pas:
-            print("Login successful")
-            return u
-         else:
-            attempts -= 1
-            print(f"Invalid login:{attempts}")
-            return None
+            if u["name"] == user and u["password"] == pas:
+                print("Login successful")
+                return u
 
+        attempts -= 1
+        print(f"Invalid login. Attempts left: {attempts}")
 
+    return None
 
 current_user = login(users)
 
